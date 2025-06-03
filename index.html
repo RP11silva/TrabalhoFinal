@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="general.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Brasil</title>
+
+  <style>
+    .divClara {
+      background-color: white;
+      color: black;
+    }
+    .divEscura {
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+  <a href="index.html">
+    <img src="https://logodownload.org/wp-content/uploads/2017/11/cbf-logo-selecao-logo-brasil.png" alt="Logo">
+  </a>
+  <nav>
+    <a href="neymar.html">Neymar</a>
+    <a>X</a>
+    <a href="ronaldo.html">Ronaldinho</a>
+  </nav>
+</header>
+
+
+  <div style="margin: 10px;">
+    <label for="idioma">Idioma / Language:</label>
+    <select id="idioma" onchange="trocarIdioma(this.value)">
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <section class="container">
+    <div class="infoJogador" id="jogador1">
+      <img class="a" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK7RM4bEOHL0Qm7aHkKu81isTlbQ_ZpiHrkw&s" alt="Ney">
+      <ul id="neymarStats"></ul>
+    </div>
+
+    <div class="infoJogador" id="jogador2">
+      <img class="ab" src="https://acdn-us.mitiendanube.com/stores/002/935/203/products/camisa-retro-brasil-2002-azul-reserva-ronaldinho-310d5dd73af6274c9517120095078380-480-0.png" alt="Ronaldo">
+      <ul id="ronaldoStats"></ul>
+    </div>
+  </section>
+
+  <button onclick="setTema(false)">Modo Claro</button>
+  <button onclick="setTema(true)">Modo Escuro</button>
+
+  <script>
+
+    function setTema(escuro) {
+      localStorage.setItem('modoEscuro', escuro);
+      aplicarTema(escuro);
+    }
+
+    function aplicarTema(escuro) {
+      const blocos = document.querySelectorAll('.infoJogador');
+      blocos.forEach(div => {
+        div.className = escuro ? 'infoJogador divEscura' : 'infoJogador divClara';
+      });
+    }
+
+    const traducoes = {
+      pt: {
+        neymar: [
+          "Jogos Disputados: 128",
+          "Títulos: 3",
+          "Gols Marcados: 79",
+          "Assistências: 56",
+          "Ouro Olímpico: 2016"
+        ],
+        ronaldo: [
+          "Jogos Disputados: 97",
+          "Títulos: 3",
+          "Gols Marcados: 33",
+          "Assistências: 29",
+          "Copa do mundo de 2002"
+        ]
+      },
+      en: {
+        neymar: [
+          "Matches Played: 128",
+          "Titles: 3",
+          "Goals Scored: 79",
+          "Assists: 56",
+          "Olympic Gold: 2016"
+        ],
+        ronaldo: [
+          "Matches Played: 97",
+          "Titles: 3",
+          "Goals Scored: 33",
+          "Assists: 29",
+          "World Cup 2002"
+        ]
+      }
+    };
+
+    function trocarIdioma(idioma) {
+      localStorage.setItem('idioma', idioma);
+      preencherTexto(idioma);
+    }
+
+    function preencherTexto(idioma) {
+      const neymarStats = document.getElementById('neymarStats');
+      const ronaldoStats = document.getElementById('ronaldoStats');
+
+      neymarStats.innerHTML = traducoes[idioma].neymar.map(item => `<li>${item}</li>`).join('');
+      ronaldoStats.innerHTML = traducoes[idioma].ronaldo.map(item => `<li>${item}</li>`).join('');
+    }
+
+    window.onload = function () {
+      const temaSalvo = localStorage.getItem('modoEscuro');
+      const escuro = temaSalvo === 'true';
+      aplicarTema(escuro);
+
+      const idiomaSalvo = localStorage.getItem('idioma') || 'pt';
+      document.getElementById('idioma').value = idiomaSalvo;
+      preencherTexto(idiomaSalvo);
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+color: #000;
+}
+
+div { 
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 45%;
+}
+ 
+li{ 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: 15px;
+  list-style-type: none;
+  text-align: center;
+
+}
+
+.a{ 
+  width: 100px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.ab{
+    width: 160px;
+    display: block;
+    margin: 0 auto 20px;
+}
